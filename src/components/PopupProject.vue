@@ -5,22 +5,37 @@
           persistent
           max-width="800px"
       >
-        <v-card flat class="mb-1" v-slot:activator="{on}">
-            <v-layout row wrap :class="`pa-3 project ${status}`">
-                <v-flex lg6 xs12 md6>
-                    <div class="caption grey--text">Name</div>
-                    <div>{{name}}</div>
-                </v-flex>
-                <v-flex lg3 xs6 sm4 md2>
-                    <div class="caption grey--text">Due By</div>
-                    <div>{{dueBy()}}</div>
-                </v-flex>
-                <v-flex xs6 lg3>
-                    <div class="caption grey--text">For</div>
-                    <div>{{date}}</div>
-                </v-flex>
-            </v-layout>
+        <template v-slot:activator="{on}">
+            <v-card flat class="mb-1" v-on="on">
+                <v-layout row wrap :class="`pa-3 project ${status}`">
+                    <v-flex lg6 xs12 md6>
+                        <div class="caption grey--text">Title</div>
+                        <div>{{name}}</div>
+                    </v-flex>
+                    <v-flex lg3 xs6 sm4 md2>
+                        <div class="caption grey--text">Due By</div>
+                        <div>{{dueBy()}}</div>
+                    </v-flex>
+                    <v-flex xs6 lg3>
+                        <div class="caption grey--text">For</div>
+                        <div>{{date}}</div>
+                    </v-flex>
+                </v-layout>
+            </v-card>
+        </template>
+
+        <v-card @click="dialog = false">
+            <v-card-title primary-title>
+                <span class="headline">{{name}}</span>
+            </v-card-title>
+            <v-card-text>
+                <div class="project-content">
+                    <h3>Title</h3>
+                    <span>{{description}}</span>
+                </div>
+            </v-card-text>
         </v-card>
+        
       </v-dialog>
       
   </div>
@@ -57,5 +72,7 @@ export default {
 </script>
 
 <style>
-
+.project-content{
+    margin-top: 10px;
+}
 </style>

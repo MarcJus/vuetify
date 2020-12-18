@@ -49,11 +49,13 @@
                             label="Persons"
                             chips
                             flat
+                            :hint="!this.selectValid ? 'You must select a person' : null"
+                            persistent-hint
                             multiple
                             color="blue darken-4"
                             solo
                         ></v-select>
-                        <p v-if="selectValid == false" class="red--text">You must select a person</p>
+                        <!-- <p v-if="selectValid == false" class="red--text">You must select a person</p> -->
                       </v-flex>
                   </v-layout>
               </v-card-text>
