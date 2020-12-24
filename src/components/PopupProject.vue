@@ -6,7 +6,7 @@
           max-width="800px"
       > -->
         <!-- <template v-slot:activator="{on}"> -->
-            <v-card flat class="mb-1" v-on="on">
+            <v-card flat class="mb-1" v-on="on" @click="postRequest">
                 <v-layout row wrap :class="`pa-3 project ${status}`">
                     <v-flex lg6 xs12 md6>
                         <div class="caption grey--text">Title</div>
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
 export default {
     props: {
         name: String,
@@ -61,6 +63,11 @@ export default {
                 }
             }
             return message;
+        },
+        postRequest(){
+            const params = new URLSearchParams();
+            params.append("message", "test reussi");
+            Vue.axios.post("http://192.168.0.26:3000/testPost", params).then((res) => {console.log(res.data)});
         }
     }
 }
