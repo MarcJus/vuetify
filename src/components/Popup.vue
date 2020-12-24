@@ -55,7 +55,6 @@
                             color="blue darken-4"
                             solo
                         ></v-select>
-                        <!-- <p v-if="selectValid == false" class="red--text">You must select a person</p> -->
                       </v-flex>
                   </v-layout>
               </v-card-text>
@@ -103,14 +102,26 @@ export default {
             return `${day.padStart(2, '0')}-${month.padStart(2, '0')}-${year}`
         },
         validate(){
-            if(this.select == [] || this.select == ''){
-                this.selectValid = false;
-            } else {
-                this.selectValid = true;
-            }
             if(this.$refs.form.validate() && this.selectValid){
+                // Vue.axios.post("http://192.168.0.26:3000/addProject", {
+                //     name: this.title,
+                //     description: this.content,
+                //     person: personList,
+                //     status: "progress",
+                //     date: this.dateFormatted
+                // }).then((res) => {
+                //     console.log(res.data.success);
+                // });
+                Vue.axios.get("http://192.168.0.26:3000/addProject")
+                .then((res) => {
+                    console.log(res.data);
+                });
                 this.dialog = false;
                 this.resetDialog();
+                let personList = [];
+                for(let i = 0; i < this.select.length; i++){
+                    personList.push(this.select[i]);
+                }
             }
         },
         resetDialog(){
