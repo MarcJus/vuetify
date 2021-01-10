@@ -57,7 +57,6 @@ export default {
             let message = "";
             console.log(this.team.length);
             for(let i = 0; i < this.team.length; i++){
-                console.log(this.team[i]);
                 if(i == this.team.length -1){
                     message += this.team[i]
                 } else {

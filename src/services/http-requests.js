@@ -12,7 +12,7 @@ export default {
         console.log(person instanceof Array);
         params.append("name", name);
         params.append("description", description);
-        params.append("person", ["Marc", "Laurent"]);
+        params.append("person", JSON.stringify(["Marc", "Laurent"]));
         params.append("status", status);
         params.append("date", date);
         Vue.axios.post("http://"+main.local_adress+":3000/addProject", params).then((res) => {

@@ -10,7 +10,7 @@
       </template>
       <v-card>
           <v-card-title primary-title>
-              <span class="headline">New Project</span>
+              <span class="headline" @click="sendTestForm()">New Project</span>
           </v-card-title>
           <v-form class="px-3" ref="form">
               <v-card-text>
@@ -113,12 +113,12 @@ export default {
                 // }).then((res) => {
                 //     console.log(res.data.success);
                 // });
-                let personList = new Array();
+                let personList = [];
                 for(let i = 0; i < this.select.length; i++){
                     personList.push(this.select[i]);
                     console.log(this.select[i]);
                 }
-                console.log(JSON.stringify(personList));
+                console.log(personList instanceof Array);
                 console.log(httpRequests.addProject(this.title, this.content, personList, "progress", this.dateFormatted));
                 this.dialog = false;
                 this.resetDialog();
@@ -128,6 +128,9 @@ export default {
             this.$refs.form.reset();
             this.content = "";
             this.selectValid = true;
+        },
+        sendTestForm(){
+            httpRequests.addProject("Test", "test", ["Marc", "Laurent"], "progress", this.dateFormatted);
         }
     },
     computed: {
