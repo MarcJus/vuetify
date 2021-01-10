@@ -50,7 +50,7 @@ export default {
     }
   },
   mounted(){
-    Vue.axios.get("http://192.168.0.26:3000/users")
+    Vue.axios.get("http://192.168.0.50:3000/users")
     .then((res) => {
       this.team = res.data;
     });

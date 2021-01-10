@@ -22,18 +22,6 @@
             <span>sort person</span>
           </v-tooltip>
         </v-layout>
-        <!-- <v-card flat v-for="project in projects" :key="project.name" class="mb-1">
-          <v-layout row wrap :class="`pa-3 project ${project.status}`">
-            <v-flex xs12 md6>
-              <div class="caption grey--text">Name</div>
-              <div>{{project.name}}</div>
-            </v-flex>
-            <v-flex xs6 sm4 md2>
-              <div class="caption grey--text">Due By</div>
-              <div>{{project.date}}</div>
-            </v-flex>
-          </v-layout>
-        </v-card> -->
         <v-flex xs12 lg12 v-for="project in projects" :key="project.name">
           <PopupProject :name="project.name" :description="project.description" :team="project.person" :status="project.status" :date="project.date" />
         </v-flex>
@@ -57,9 +45,10 @@ export default {
     }
   },
   mounted(){
-    Vue.axios.get("http://192.168.0.26:3000/projects")
+    Vue.axios.get("http://192.168.0.50:3000/projects")
     .then((res) => {
       this.projects = res.data;
+      console.log(this.projects[0].person instanceof Array);
     })
   },
   components: {

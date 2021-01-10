@@ -1,11 +1,11 @@
 <template>
   <div class="popup-project">
-      <!-- <v-dialog
+      <v-dialog
           v-model="dialog"
           persistent
           max-width="800px"
-      > -->
-        <!-- <template v-slot:activator="{on}"> -->
+      >
+        <template v-slot:activator="{on}">
             <v-card flat class="mb-1" v-on="on" @click="postRequest">
                 <v-layout row wrap :class="`pa-3 project ${status}`">
                     <v-flex lg6 xs12 md6>
@@ -22,8 +22,7 @@
                     </v-flex>
                 </v-layout>
             </v-card>
-        <!-- </template> -->
-<!-- 
+        </template>
         <v-card @click="dialog = false">
             <v-card-title primary-title>
                 <span class="headline">{{name}}</span>
@@ -34,9 +33,9 @@
                     <span>{{description}}</span>
                 </div>
             </v-card-text>
-        </v-card> -->
+        </v-card>
         
-      <!-- </v-dialog> -->
+      </v-dialog>
       
   </div>
 </template>
@@ -51,11 +50,14 @@ export default {
         date: String,
         status: String,
         team: Array,
+        id: Number,
     },
     methods: {
         dueBy(){
             let message = "";
+            console.log(this.team.length);
             for(let i = 0; i < this.team.length; i++){
+                console.log(this.team[i]);
                 if(i == this.team.length -1){
                     message += this.team[i]
                 } else {
@@ -67,8 +69,16 @@ export default {
         postRequest(){
             const params = new URLSearchParams();
             params.append("message", "test reussi");
-            Vue.axios.post("http://192.168.0.26:3000/testPost", params).then((res) => {console.log(res.data)});
+            Vue.axios.post("http://192.168.0.50:3000/testPost", params).then((res) => {console.log(res.data)})
+            .catch(() => console.log("Erreur"));
         }
+    },
+    data(){
+        return{
+            dialog: undefined,
+        }
+    },
+    mounted(){
     }
 }
 </script>

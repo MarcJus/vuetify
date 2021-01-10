@@ -71,13 +71,14 @@
 
 <script>
 import Vue from 'vue';
+import httpRequests from '../services/http-requests'
 
 export default {
     data: vm => ({
         dialog: false,
         title: '',
         content: '',
-        select: '',
+        select: [],
         date: new Date().toDateString().substring(0, 10),
         dateFormatted: vm.formatDate(new Date().toISOString().substring(0, 10)),
         menu1: false,
@@ -103,7 +104,7 @@ export default {
         },
         validate(){
             if(this.$refs.form.validate() && this.selectValid){
-                // Vue.axios.post("http://192.168.0.26:3000/addProject", {
+                // Vue.axios.post("http://192.168.0.50:3000/addProject", {
                 //     name: this.title,
                 //     description: this.content,
                 //     person: personList,
@@ -112,16 +113,15 @@ export default {
                 // }).then((res) => {
                 //     console.log(res.data.success);
                 // });
-                Vue.axios.get("http://192.168.0.26:3000/addProject")
-                .then((res) => {
-                    console.log(res.data);
-                });
-                this.dialog = false;
-                this.resetDialog();
-                let personList = [];
+                let personList = new Array();
                 for(let i = 0; i < this.select.length; i++){
                     personList.push(this.select[i]);
+                    console.log(this.select[i]);
                 }
+                console.log(JSON.stringify(personList));
+                console.log(httpRequests.addProject(this.title, this.content, personList, "progress", this.dateFormatted));
+                this.dialog = false;
+                this.resetDialog();
             }
         },
         resetDialog(){
@@ -141,7 +141,7 @@ export default {
         }
     },
     mounted(){
-        Vue.axios.get("http://192.168.0.26:3000/getNames")
+        Vue.axios.get("http://192.168.0.50:3000/getNames")
         .then((res) => {
             var data = res.data;
             this.person = new Array();

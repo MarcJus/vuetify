@@ -12,3 +12,7 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+export default {
+  local_adress: "192.168.0.50",
+}
